@@ -9,7 +9,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 
 @app.route('/')
 def home():
-    return "Home Page"
+    return "Home Page 1"
 
 
 @app.route('/linkedin')
