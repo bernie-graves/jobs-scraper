@@ -6,7 +6,7 @@ from linkedin_jobs_scraper.filters import RelevanceFilters, TimeFilters, TypeFil
 from datetime import date
 import pandas as pd
 import sqlalchemy
-import psycopg2
+import pg8000
 import os
 
 # Change root logger level (default is WARN)
