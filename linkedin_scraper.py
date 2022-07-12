@@ -75,7 +75,7 @@ def scrape_linkedin():
     # something like https://cloud.google.com/secret-manager/docs/overview to help keep
     # secrets secret.
     db_user = os.environ["POSTGRES-USER"]
-    db_pass = os.environ["POSTGRES-PASS"]
+    db_pass = os.environ["POSTGRES-PASSWORD"]
     db_name = os.environ["POSTGRES-NAME"]
     db_socket_dir = os.environ.get("DB_SOCKET_DIR", "/cloudsql")
     instance_connection_name = os.environ["POSTGRES-CONNECTION-NAME"]
