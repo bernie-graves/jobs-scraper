@@ -18,7 +18,7 @@ def linkedin():
     # Scrape LinkedIn and send to PostgreSQL DB
     result = scrape_linkedin()
 
-    return result
+    return result.to_string()
 
 
 @app.route('/linkedin-newtable')
@@ -27,7 +27,7 @@ def linkedin_newtable():
     # Scrape LinkedIn and send to PostgreSQL DB
     result = scrape_linkedin(if_exists='replace')
 
-    return result
+    return result.to_string()
 
 
 @ app.route('/indeed')
