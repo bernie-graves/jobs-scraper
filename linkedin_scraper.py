@@ -55,7 +55,7 @@ queries = [
     Query(
         query='Data Scientist',
         options=QueryOptions(
-            locations=['United States'],
+            locations=['Santa Barbara'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
             limit=5,
@@ -67,11 +67,25 @@ queries = [
             )
         )
     ),
+    Query(
+        query='Data Analyst',
+        options=QueryOptions(
+            locations=['Santa Babara'],
+            # Try to extract apply link (easy applies are skipped). Default to False.
+            apply_link=True,
+            limit=5,
+            filters=QueryFilters(
+                # Filter by companies.
+                time=TimeFilters.DAY,
+                type=[TypeFilters.INTERNSHIP],
+                experience=ExperienceLevelFilters.INTERNSHIP,
+            )
+        )
+    )
 ]
 
 
-def scrape_linkedin():
-
+def connect_to_postgres():
     # Getting DB connection URL
     db_user = os.environ["DB_USER"]
     db_password = os.environ["DB_PASSWORD"]
@@ -79,10 +93,18 @@ def scrape_linkedin():
     db_host = os.environ["DB_HOST"]
     db_port = os.environ["DB_PORT"]
 
+    # setting database URL
     conn_url = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
 
     # connectiong to DB
     engine = create_engine(conn_url)
+
+    return engine
+
+
+def scrape_linkedin(if_exists='append'):
+
+    engine = connect_to_postgres()
 
     # run scraper - appends to jobs
     scraper.run(queries)
@@ -92,6 +114,6 @@ def scrape_linkedin():
 
     # post to DB
     with engine.connect() as con:
-        df.to_sql('jobs', con=con, if_exists='append', index=False)
+        df.to_sql('jobs', con=con, if_exists=if_exists, index=False)
 
-    return 'Success!'
+    return df

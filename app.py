@@ -21,6 +21,15 @@ def linkedin():
     return result
 
 
+@app.route('/linkedin-newtable')
+def linkedin_newtable():
+
+    # Scrape LinkedIn and send to PostgreSQL DB
+    result = scrape_linkedin(if_exists='replace')
+
+    return result
+
+
 @ app.route('/indeed')
 def indeed():
 
