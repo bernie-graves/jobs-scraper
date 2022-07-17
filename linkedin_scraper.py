@@ -65,7 +65,6 @@ queries = [
                 time=TimeFilters.DAY,
                 type=[TypeFilters.INTERNSHIP],
                 experience=ExperienceLevelFilters.INTERNSHIP,
-                remote=RemoteFilters.REMOTE
             )
         )
     ),
@@ -81,7 +80,6 @@ queries = [
                 time=TimeFilters.DAY,
                 type=[TypeFilters.INTERNSHIP],
                 experience=ExperienceLevelFilters.INTERNSHIP,
-                remote=RemoteFilters.REMOTE
             )
         )
     )
