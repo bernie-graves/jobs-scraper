@@ -62,7 +62,7 @@ queries = [
             limit=50,
             filters=QueryFilters(
                 # Filter by companies.
-                time=[TimeFilters.DAY, TimeFilters.WEEK],
+                time=TimeFilters.DAY,
                 type=[TypeFilters.INTERNSHIP],
                 experience=ExperienceLevelFilters.INTERNSHIP,
             )
@@ -77,7 +77,7 @@ queries = [
             limit=50,
             filters=QueryFilters(
                 # Filter by companies.
-                time=[TimeFilters.DAY, TimeFilters.WEEK],
+                time=TimeFilters.DAY,
                 type=[TypeFilters.INTERNSHIP],
                 experience=ExperienceLevelFilters.INTERNSHIP,
             )
@@ -91,7 +91,7 @@ queries = [
             limit=50,
             filters=QueryFilters(
                 # Filter by companies.
-                time=[TimeFilters.DAY, TimeFilters.WEEK],
+                time=TimeFilters.WEEK,
                 type=[TypeFilters.INTERNSHIP],
                 experience=ExperienceLevelFilters.INTERNSHIP,
             )
