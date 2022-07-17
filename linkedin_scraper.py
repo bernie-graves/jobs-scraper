@@ -44,7 +44,7 @@ scraper = LinkedinScraper(
     max_workers=3,
     # Slow down the scraper to avoid 'Too many requests 429' errors (in seconds)
     slow_mo=0.5,
-    page_load_timeout=20  # Page load timeout (in seconds)
+    page_load_timeout=120  # Page load timeout (in seconds)
 )
 
 # Add event listeners
