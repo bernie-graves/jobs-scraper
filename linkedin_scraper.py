@@ -54,7 +54,7 @@ scraper.on(Events.END, on_end)
 
 queries = [
     Query(
-        query='Data Scientist',
+        query='Intern',
         options=QueryOptions(
             locations=['Santa Barbara', 'Goleta', 'Los Angeles'],
             # Try to extract apply link (easy applies are skipped). Default to False.
@@ -62,7 +62,7 @@ queries = [
             limit=50,
             filters=QueryFilters(
                 # Filter by companies.
-                time=TimeFilters.WEEK,
+                time=TimeFilters.MONTH,
                 type=[TypeFilters.INTERNSHIP],
                 experience=ExperienceLevelFilters.INTERNSHIP,
             )
