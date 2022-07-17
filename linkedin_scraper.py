@@ -43,7 +43,7 @@ scraper = LinkedinScraper(
     # How many threads will be spawned to run queries concurrently (one Chrome driver for each thread)
     max_workers=4,
     # Slow down the scraper to avoid 'Too many requests 429' errors (in seconds)
-    slow_mo=0.5,
+    slow_mo=0.75,
     page_load_timeout=60  # Page load timeout (in seconds)
 )
 
@@ -59,7 +59,7 @@ queries = [
             locations=['Santa Barbara', 'Goleta'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
-            limit=50,
+            limit=5,
             filters=QueryFilters(
                 # Filter by companies.
                 time=TimeFilters.WEEK,
@@ -74,7 +74,7 @@ queries = [
             locations=['Santa Barbara', 'Goleta'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
-            limit=50,
+            limit=5,
             filters=QueryFilters(
                 # Filter by companies.
                 time=TimeFilters.WEEK,
@@ -89,7 +89,7 @@ queries = [
             locations=['Santa Barbara', 'Goleta'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
-            limit=50,
+            limit=5,
             filters=QueryFilters(
                 # Filter by companies.
                 time=TimeFilters.WEEK,
@@ -104,7 +104,7 @@ queries = [
             locations=['Santa Barbara', 'Goleta'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
-            limit=50,
+            limit=5,
             filters=QueryFilters(
                 # Filter by companies.
                 time=TimeFilters.MONTH,
@@ -141,9 +141,9 @@ def scrape_linkedin(if_exists='append'):
                                      'date', 'description'])
     df['platform'] = 'LinkedIn'
 
-    # engine = connect_to_postgres()
+    engine = connect_to_postgres()
     # post to DB
-    # with engine.connect() as con:
-    #     df.to_sql('jobs', con=con, if_exists=if_exists, index=False)
+    with engine.connect() as con:
+        df.to_sql('jobs', con=con, if_exists=if_exists, index=False)
 
     return df
