@@ -41,10 +41,10 @@ scraper = LinkedinScraper(
     chrome_options=None,  # Custom Chrome options here
     headless=True,  # Overrides headless mode only if chrome_options is None
     # How many threads will be spawned to run queries concurrently (one Chrome driver for each thread)
-    max_workers=1,
+    max_workers=4,
     # Slow down the scraper to avoid 'Too many requests 429' errors (in seconds)
     slow_mo=0.5,
-    page_load_timeout=1200  # Page load timeout (in seconds)
+    page_load_timeout=60  # Page load timeout (in seconds)
 )
 
 # Add event listeners
@@ -54,9 +54,54 @@ scraper.on(Events.END, on_end)
 
 queries = [
     Query(
+        query='Data Analyst',
+        options=QueryOptions(
+            locations=['Santa Barbara', 'Goleta'],
+            # Try to extract apply link (easy applies are skipped). Default to False.
+            apply_link=True,
+            limit=50,
+            filters=QueryFilters(
+                # Filter by companies.
+                time=TimeFilters.WEEK,
+                type=[TypeFilters.INTERNSHIP],
+                experience=None,
+            )
+        )
+    ),
+    Query(
+        query='Data Scientist',
+        options=QueryOptions(
+            locations=['Santa Barbara', 'Goleta'],
+            # Try to extract apply link (easy applies are skipped). Default to False.
+            apply_link=True,
+            limit=50,
+            filters=QueryFilters(
+                # Filter by companies.
+                time=TimeFilters.WEEK,
+                type=[TypeFilters.INTERNSHIP],
+                experience=None,
+            )
+        )
+    ),
+    Query(
+        query='Data Intern',
+        options=QueryOptions(
+            locations=['Santa Barbara', 'Goleta'],
+            # Try to extract apply link (easy applies are skipped). Default to False.
+            apply_link=True,
+            limit=50,
+            filters=QueryFilters(
+                # Filter by companies.
+                time=TimeFilters.WEEK,
+                type=[TypeFilters.INTERNSHIP],
+                experience=None,
+            )
+        )
+    ),
+    Query(
         query='Intern',
         options=QueryOptions(
-            locations=['Santa Barbara', 'Goleta', 'Los Angeles'],
+            locations=['Santa Barbara', 'Goleta'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
             limit=50,
@@ -64,7 +109,7 @@ queries = [
                 # Filter by companies.
                 time=TimeFilters.MONTH,
                 type=[TypeFilters.INTERNSHIP],
-                experience=ExperienceLevelFilters.INTERNSHIP,
+                experience=None,
             )
         )
     ),
