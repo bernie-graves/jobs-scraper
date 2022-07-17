@@ -56,36 +56,7 @@ queries = [
     Query(
         query='Data Scientist',
         options=QueryOptions(
-            locations=['Santa Barbara', 'Goleta'],
-            # Try to extract apply link (easy applies are skipped). Default to False.
-            apply_link=True,
-            limit=50,
-            filters=QueryFilters(
-                # Filter by companies.
-                time=TimeFilters.DAY,
-                type=[TypeFilters.INTERNSHIP],
-                experience=ExperienceLevelFilters.INTERNSHIP,
-            )
-        )
-    ),
-    Query(
-        query='Data Analyst',
-        options=QueryOptions(
-            locations=['Santa Babara', 'Goleta'],
-            # Try to extract apply link (easy applies are skipped). Default to False.
-            apply_link=True,
-            limit=50,
-            filters=QueryFilters(
-                # Filter by companies.
-                time=TimeFilters.DAY,
-                type=[TypeFilters.INTERNSHIP],
-                experience=ExperienceLevelFilters.INTERNSHIP,
-            )
-        )
-    ),
-    Query(
-        query='Data Analyst',
-        options=QueryOptions(
+            locations=['Santa Barbara', 'Goleta', 'Los Angeles'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
             limit=50,
@@ -96,7 +67,7 @@ queries = [
                 experience=ExperienceLevelFilters.INTERNSHIP,
             )
         )
-    )
+    ),
 ]
 
 
