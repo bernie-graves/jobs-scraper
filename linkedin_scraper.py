@@ -12,14 +12,15 @@ import os
 # Change root logger level (default is WARN)
 logging.basicConfig(level=logging.INFO)
 
+# initializing list to append to - probably a better way then setting as global var
 jobs = list()
+
+# function to append to jobs list was scraper scrapes
 
 
 def on_data(data: EventData):
     jobs.append([data.title, data.location, data.apply_link,
                 data.company, data.date, data.description])
-
-# Fired once for each page (25 jobs)
 
 
 def on_metrics(metrics: EventMetrics):
@@ -40,7 +41,7 @@ scraper = LinkedinScraper(
     chrome_options=None,  # Custom Chrome options here
     headless=True,  # Overrides headless mode only if chrome_options is None
     # How many threads will be spawned to run queries concurrently (one Chrome driver for each thread)
-    max_workers=1,
+    max_workers=5,
     # Slow down the scraper to avoid 'Too many requests 429' errors (in seconds)
     slow_mo=0.5,
     page_load_timeout=20  # Page load timeout (in seconds)
@@ -55,30 +56,32 @@ queries = [
     Query(
         query='Data Scientist',
         options=QueryOptions(
-            locations=['Santa Barbara'],
+            locations=['Santa Barbara', 'Goleta'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
-            limit=5,
+            limit=50,
             filters=QueryFilters(
                 # Filter by companies.
                 time=TimeFilters.DAY,
                 type=[TypeFilters.INTERNSHIP],
                 experience=ExperienceLevelFilters.INTERNSHIP,
+                remote=RemoteFilters.REMOTE
             )
         )
     ),
     Query(
         query='Data Analyst',
         options=QueryOptions(
-            locations=['Santa Babara'],
+            locations=['Santa Babara', 'Goleta'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
-            limit=5,
+            limit=50,
             filters=QueryFilters(
                 # Filter by companies.
                 time=TimeFilters.DAY,
                 type=[TypeFilters.INTERNSHIP],
                 experience=ExperienceLevelFilters.INTERNSHIP,
+                remote=RemoteFilters.REMOTE
             )
         )
     )
