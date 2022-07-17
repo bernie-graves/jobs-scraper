@@ -41,10 +41,10 @@ scraper = LinkedinScraper(
     chrome_options=None,  # Custom Chrome options here
     headless=True,  # Overrides headless mode only if chrome_options is None
     # How many threads will be spawned to run queries concurrently (one Chrome driver for each thread)
-    max_workers=3,
+    max_workers=1,
     # Slow down the scraper to avoid 'Too many requests 429' errors (in seconds)
     slow_mo=0.5,
-    page_load_timeout=120  # Page load timeout (in seconds)
+    page_load_timeout=1200  # Page load timeout (in seconds)
 )
 
 # Add event listeners
@@ -90,16 +90,15 @@ def connect_to_postgres():
 
 def scrape_linkedin(if_exists='append'):
 
-    engine = connect_to_postgres()
-
     # run scraper - appends to jobs
     scraper.run(queries)
     df = pd.DataFrame(jobs, columns=['title', 'location', 'link', 'company',
                                      'date', 'description'])
     df['platform'] = 'LinkedIn'
 
+    # engine = connect_to_postgres()
     # post to DB
-    with engine.connect() as con:
-        df.to_sql('jobs', con=con, if_exists=if_exists, index=False)
+    # with engine.connect() as con:
+    #     df.to_sql('jobs', con=con, if_exists=if_exists, index=False)
 
     return df
