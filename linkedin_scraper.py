@@ -41,7 +41,7 @@ scraper = LinkedinScraper(
     chrome_options=None,  # Custom Chrome options here
     headless=True,  # Overrides headless mode only if chrome_options is None
     # How many threads will be spawned to run queries concurrently (one Chrome driver for each thread)
-    max_workers=1,
+    max_workers=3,
     # Slow down the scraper to avoid 'Too many requests 429' errors (in seconds)
     slow_mo=0.75,
     page_load_timeout=60  # Page load timeout (in seconds)
@@ -59,10 +59,10 @@ queries = [
             locations=['Santa Barbara', 'Goleta'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
-            limit=5,
+            limit=50,
             filters=QueryFilters(
                 # Filter by companies.
-                time=TimeFilters.WEEK,
+                time=TimeFilters.DAY,
                 type=[TypeFilters.INTERNSHIP],
                 experience=None,
             )
@@ -74,25 +74,10 @@ queries = [
             locations=['Santa Barbara', 'Goleta'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
-            limit=5,
+            limit=50,
             filters=QueryFilters(
                 # Filter by companies.
-                time=TimeFilters.WEEK,
-                type=[TypeFilters.INTERNSHIP],
-                experience=None,
-            )
-        )
-    ),
-    Query(
-        query='Data Intern',
-        options=QueryOptions(
-            locations=['Santa Barbara', 'Goleta'],
-            # Try to extract apply link (easy applies are skipped). Default to False.
-            apply_link=True,
-            limit=5,
-            filters=QueryFilters(
-                # Filter by companies.
-                time=TimeFilters.WEEK,
+                time=TimeFilters.DAY,
                 type=[TypeFilters.INTERNSHIP],
                 experience=None,
             )
@@ -104,10 +89,10 @@ queries = [
             locations=['Santa Barbara', 'Goleta'],
             # Try to extract apply link (easy applies are skipped). Default to False.
             apply_link=True,
-            limit=5,
+            limit=50,
             filters=QueryFilters(
                 # Filter by companies.
-                time=TimeFilters.MONTH,
+                time=TimeFilters.DAY,
                 type=[TypeFilters.INTERNSHIP],
                 experience=None,
             )
@@ -146,4 +131,4 @@ def scrape_linkedin(if_exists='append'):
     with engine.connect() as con:
         df.to_sql('jobs', con=con, if_exists=if_exists, index=False)
 
-    return df
+    return df.shape
