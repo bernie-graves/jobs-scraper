@@ -43,7 +43,7 @@ scraper = LinkedinScraper(
     # How many threads will be spawned to run queries concurrently (one Chrome driver for each thread)
     max_workers=3,
     # Slow down the scraper to avoid 'Too many requests 429' errors (in seconds)
-    slow_mo=0.75,
+    slow_mo=0.6,
     page_load_timeout=60  # Page load timeout (in seconds)
 )
 
